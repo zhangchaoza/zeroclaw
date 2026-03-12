@@ -1301,11 +1301,12 @@ fn create_provider_with_url_and_options(
                 "Custom provider",
                 "custom:https://your-api.com",
             )?;
-            Ok(Box::new(OpenAiCompatibleProvider::new_with_vision(
+            Ok(Box::new(OpenAiCompatibleProvider::new_with_user_agent_and_vision(
                 "Custom",
                 &base_url,
                 key,
                 AuthStyle::Bearer,
+                &std::env::var("ZEROCLAW_CUSTOM_USER_AGENT").unwrap_or(format!("ZeroClaw-Client/{}", env!("CARGO_PKG_VERSION"))),
                 true,
             )))
         }

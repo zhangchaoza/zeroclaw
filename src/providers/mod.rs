@@ -1488,11 +1488,12 @@ fn create_provider_with_url_and_options(
             let api_mode = options
                 .custom_provider_api_mode
                 .unwrap_or(CompatibleApiMode::OpenAiChatCompletions);
-            Ok(Box::new(OpenAiCompatibleProvider::new_custom_with_mode(
+            Ok(Box::new(OpenAiCompatibleProvider::new_custom_with_mode_with_user_agent(
                 "Custom",
                 &base_url,
                 key,
                 AuthStyle::Bearer,
+                &std::env::var("ZEROCLAW_CUSTOM_USER_AGENT").unwrap_or(format!("ZeroClaw-Client/{}", env!("CARGO_PKG_VERSION"))),
                 true,
                 api_mode,
                 options.max_tokens_override,

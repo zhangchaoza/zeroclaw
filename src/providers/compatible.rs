@@ -232,6 +232,31 @@ impl OpenAiCompatibleProvider {
         )
     }
 
+    /// Constructor used by `custom:` providers to choose explicit protocol mode.
+    pub fn new_custom_with_mode_with_user_agent(
+        name: &str,
+        base_url: &str,
+        credential: Option<&str>,
+        auth_style: AuthStyle,
+        user_agent: &str,
+        supports_vision: bool,
+        api_mode: CompatibleApiMode,
+        max_tokens_override: Option<u32>,
+    ) -> Self {
+        Self::new_with_options(
+            name,
+            base_url,
+            credential,
+            auth_style,
+            supports_vision,
+            true,
+            Some(user_agent),
+            false,
+            api_mode,
+            max_tokens_override,
+        )
+    }
+
     fn new_with_options(
         name: &str,
         base_url: &str,
